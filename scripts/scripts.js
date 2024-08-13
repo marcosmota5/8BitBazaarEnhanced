@@ -186,10 +186,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Close the popup if the user clicks outside of it
-    window.addEventListener('click', function(event) {
-        if (!signInUpBtn.contains(event.target) && !popup.contains(event.target)) {
-            signInUpPopup.classList.remove('show');
-            userProfilePopup.classList.remove('show');
-        }
-    });
+    //window.addEventListener('click', function(event) {
+    //    if (!signInUpBtn.contains(event.target) && !popup.contains(event.target)) {
+    //        signInUpPopup.classList.remove('show');
+    //        userProfilePopup.classList.remove('show');
+    //    }
+    // });
 });

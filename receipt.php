@@ -4,7 +4,12 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-
+// If the request method received was a post, execute the codes
+// this is important so, when the page first load there's no error thrown
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Set the order id
+    $_SESSION['order_id'] = $_POST['order_id'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
