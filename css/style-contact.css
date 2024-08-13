@@ -132,3 +132,23 @@ input[type="checkbox"] {
 #message {
     min-width: 570px;
 }
+
+
+/* Media query for small screens */
+@media screen and (max-width: 768px) {
+
+    .form-field-group {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    #message {
+        min-width: 100px;
+    }
+
+    .contact-form form {
+        padding: 10px;
+    }
+
+}
