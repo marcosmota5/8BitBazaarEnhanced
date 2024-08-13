@@ -110,6 +110,7 @@
                 <button class="submit-button" type="button" onclick="document.getElementById('submit-btn').click()"><span class="material-symbols-outlined">
                         save
                     </span>&nbsp;Confirm Change</button>
+                <!-- Hidden inputs to hold the user id -->
                 <input style="display: none;" type="text" id="user_id" name="user_id" value="<?php echo isset($user) ? $user->id : "" ?>">
                 <input style="display:none" type="submit" id="submit-btn">
             </div>

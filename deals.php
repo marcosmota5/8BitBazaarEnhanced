@@ -62,6 +62,7 @@ if (session_status() == PHP_SESSION_NONE) {
             if ($stmt->rowCount() > 0) {
                 // Print the products
                 foreach ($products as $product) {
+                    // Print the available products
                     echo '
                     <div class="product" id="' . $product->code . '">
                             <div class="product-image-wrapper">

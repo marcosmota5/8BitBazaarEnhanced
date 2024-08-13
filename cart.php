@@ -65,11 +65,12 @@ if (session_status() == PHP_SESSION_NONE) {
                     // Creates the variable to hold the quantity options
                     $quantityOptions = '';
 
-                    // For to add the options based on the quantity in stock
+                    // Add the options based on the quantity in stock
                     for ($i = 1; $i <= $product->quantity_in_stock; $i++) {
                         $quantityOptions = $quantityOptions . '<option value="' . $i . '">' . $i . '</option>';
                     }
 
+                    // Print the cart items
                     echo '
                     <div class="cart-item" id="' . $product->code . '" style="display: none">
                         <div class="delete-button" onclick="deleteCartItem(\'' . $product->code . '\')">
@@ -100,6 +101,7 @@ if (session_status() == PHP_SESSION_NONE) {
         <h2 class="cart-total">Total: <span id="total-value">$ 0</span></h2>
         <form action="<?php echo isset($_SESSION['user_id']) ? "checkout.php" : "login.php" ?>" id="form-checkout"
             method="<?php echo isset($_SESSION['user_id']) ? "POST" : "GET" ?>">
+            <!-- Hidden inputs to hold some important properties to be passed to the checkout -->
             <input style="display: none;" type="text" id="product_ids" name="product_ids">
             <input style="display: none;" type="text" id="quantities" name="quantities">
             <input style="display: none;" type="text" id="total" name="total">

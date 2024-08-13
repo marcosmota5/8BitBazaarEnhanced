@@ -17,7 +17,7 @@ if (session_status() == PHP_SESSION_NONE) {
     <meta name="description" content="Website of old products">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/style.css" />
-    
+
     <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon" />
 
     <!-- Google Fonts -->
@@ -29,7 +29,7 @@ if (session_status() == PHP_SESSION_NONE) {
     <!-- Page-level header -->
     <header>
         <?php
-        include ("templates/header.php");
+        include("templates/header.php");
         ?>
     </header>
     <main class="main-content-register">
@@ -37,7 +37,7 @@ if (session_status() == PHP_SESSION_NONE) {
         <div class="table-content">
             <?php
             // Code to include the products in deal
-            
+
             // Include database config file => to get our PDO object 
             require_once 'config/db_config.php';
 
@@ -59,34 +59,35 @@ if (session_status() == PHP_SESSION_NONE) {
                 $order_items_by_order[$item->order_id][] = $item;
             }
 
+            // If there are any orders, print the order table
             if ($orders) {
                 echo '<table class="table-fill">';
                 echo '<tr><th>Order Code</th><th>Order Date</th><th>Total Amount</th><th>Recipient</th><th>Action</th></tr>';
 
                 foreach ($orders as $order) {
                     echo '<tr>';
-                    echo '<td>' . htmlspecialchars($order->code) . '</td>';
-                    echo '<td>' . htmlspecialchars($order->order_date) . '</td>';
-                    echo '<td>$' . htmlspecialchars($order->total_amount) . '</td>';
-                    echo '<td>' . htmlspecialchars($order->recipient_name) . '</td>';
-                    echo '<td><button onclick="toggleOrderItems(' . htmlspecialchars($order->id) . ')">View Items</button></td>';
+                    echo '<td>' . $order->code . '</td>';
+                    echo '<td>' . $order->order_date . '</td>';
+                    echo '<td>$' . $order->total_amount . '</td>';
+                    echo '<td>' . $order->recipient_name . '</td>';
+                    echo '<td><button onclick="toggleOrderItems(' . $order->id . ')">View items</button>  <button onclick="showReceipt(' . $order->id . ')">View receipt</button></td>';
                     echo '</tr>';
 
                     // Now add a row for the order items, which will be hidden initially
                     if (isset($order_items_by_order[$order->id])) {
-                        echo '<tr id="order-items-' . htmlspecialchars($order->id) . '" style="display:none;">';
+                        echo '<tr id="order-items-' . $order->id . '" style="display:none;">';
                         echo '<td colspan="5">';
                         echo '<table border="1" cellpadding="5">';
                         echo '<tr><th>Code</th><th>Image</th><th>Name</th><th>Quantity</th><th>Price</th><th>Discount</th><th>Total Price</th></tr>';
                         foreach ($order_items_by_order[$order->id] as $item) {
                             echo '<tr>';
-                            echo '<td>' . htmlspecialchars($item->product_code) . '</td>';
-                            echo '<td><img src="' . htmlspecialchars($item->product_picture_path) . '" alt="Product Image" class="product-image"></td>';
-                            echo '<td>' . htmlspecialchars($item->product_name) . '</td>';
-                            echo '<td>' . htmlspecialchars($item->quantity) . '</td>';
-                            echo '<td>$ ' . htmlspecialchars($item->price) . '</td>';
-                            echo '<td>' . htmlspecialchars($item->discount * 100) . '%</td>';
-                            echo '<td>$ ' . htmlspecialchars($item->total_price) . '</td>';
+                            echo '<td>' . $item->product_code . '</td>';
+                            echo '<td><img src="' . $item->product_picture_path . '" alt="Product Image" class="product-image"></td>';
+                            echo '<td>' . $item->product_name . '</td>';
+                            echo '<td>' . $item->quantity . '</td>';
+                            echo '<td>$ ' . $item->price . '</td>';
+                            echo '<td>' . $item->discount * 100 . '%</td>';
+                            echo '<td>$ ' . $item->total_price . '</td>';
                             echo '</tr>';
                         }
                         echo '</table>';
@@ -104,7 +105,7 @@ if (session_status() == PHP_SESSION_NONE) {
         <!-- Page-level footer -->
         <footer>
             <?php
-            include ("templates/footer.php");
+            include("templates/footer.php");
             ?>
         </footer>
     </main>
@@ -122,6 +123,25 @@ if (session_status() == PHP_SESSION_NONE) {
             }
         }
 
+        function showReceipt(orderId) {
+            // Create a form element
+            var form = document.createElement('form');
+            form.method = 'POST';
+            form.action = 'receipt.php';
+
+            // Create an input element for the order_id
+            var input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'order_id';
+            input.value = orderId;
+
+            // Append the input to the form and the form to the body
+            form.appendChild(input);
+            document.body.appendChild(form);
+
+            // Submit the form
+            form.submit();
+        }
     </script>
 </body>
 
