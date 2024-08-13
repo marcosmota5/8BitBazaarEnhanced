@@ -68,6 +68,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = 'Email is required';
     } elseif (strlen($email) > 50) {
         $errors[] = 'Email cannot have more than 50 characters';
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) { // Use the bultin function to verify if it's a valid email
+        $errors[] = 'Email invalid';
     }
 
     // Validate address line 1
@@ -123,6 +125,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($errors)) {
         // Try-catch block to execute the needed operations in the db and catch any error
         try {
+
+            
+            // Set the sql statement
+            $sql = 'SELECT id FROM tb_users WHERE email = :email LIMIT 1';
+
+            // Prepare the SQL statement
+            $stmt = $pdo->prepare($sql);
+
+            // Execute the statement by passing the parameters and saves
+            $stmt->execute(
+                [
+                    'email' => $email
+                ]
+            );
+
+            // Get the user
+            $user = $stmt->fetch(PDO::FETCH_OBJ);
+
+            // If the user is empty, throw an exception
+            if (!empty($user)) {
+                throw new Exception('User/email already exists');
+            }
+
+
             // Set the variables to encrypt the password
             $currentDatetime = date('Y-m-d H:i:s'); // Equivalent to NOW() in MySQL
             $saltValue = bin2hex(random_bytes(16)); // Equivalent to UUID() in MySQL, used to generates a 32-character random string
@@ -228,8 +254,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // If there are no errors, redirects to the login page so the user can login
     if (empty($errors)) {
+
+        // Save the logged user in the session
+        $_SESSION['user_id'] = $userId;
+
         // Redirect to the login page
-        header("Location: login.php");
+        header("Location: index.php");
 
         // Ensure that no further code is executed after the redirection
         exit();

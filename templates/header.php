@@ -67,7 +67,7 @@ if (isset($_SESSION['user_id'])) {
         if (!empty($user)) {
             echo '
                 <div class="user-mini-info">
-                    <a href="#" id="user-mini-info" data-count=""><img src="' . $user->picture_path . '" alt="User Picture">&nbsp;<span class="user-mini-info-text">' . $user->first_name . '</span><span class="material-symbols-outlined">
+                    <a href="#" id="user-mini-info" data-count=""><img src="' . (empty($user->picture_path) ? "images/users/no-picture.png" : $user->picture_path) . '" alt="User Picture">&nbsp;<span class="user-mini-info-text">' . $user->first_name . '</span><span class="material-symbols-outlined">
                             arrow_drop_down
                         </span></a>
                     <div id="user-popup" class="user-popup-content">
@@ -81,7 +81,7 @@ if (isset($_SESSION['user_id'])) {
                         </div>
                         <div class="picture-and-details">
                             <div class="picture">
-                                <img src="' . $user->picture_path . '" alt="User Picture">
+                                <img src="' . (empty($user->picture_path) ? "images/users/no-picture.png" : $user->picture_path) . '" alt="User Picture">
                             </div>
                             <div class="details">
                                 <div>

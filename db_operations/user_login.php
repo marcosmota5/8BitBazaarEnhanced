@@ -72,8 +72,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // If there are no errors, redirects to the login page so the user can login
     if (empty($errors)) {
-        // Start the session
-        session_start();
 
         // Save the logged user in the session
         $_SESSION['user_id'] = $user->id;

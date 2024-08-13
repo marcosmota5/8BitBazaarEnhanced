@@ -98,7 +98,7 @@ if (session_status() == PHP_SESSION_NONE) {
                 <div class="form-field">
                     <label for="profile-picture">Profile picture</label>
                     <div class="user-image-selector">
-                        <img id="image-preview" src="<?php echo isset($user) ? $user->picture_path : "images/users/no-picture.png" ?>" alt="Image Preview">
+                        <img id="image-preview" src="<?php echo isset($user) && !empty($user->picture_path) ? $user->picture_path : "images/users/no-picture.png" ?>" alt="Image Preview">
                         <input type="file" id="profile-picture" name="profile-picture" accept="image/*">
                     </div>
                 </div>

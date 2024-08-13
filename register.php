@@ -1,10 +1,11 @@
 <?php
-require_once("db_operations/user_register.php");
 
 // Start the session if it wasn't started
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+
+require_once("db_operations/user_register.php");
 
 ?>
 
