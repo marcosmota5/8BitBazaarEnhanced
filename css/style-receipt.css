@@ -1,0 +1,81 @@
+/* Style for the receipt */
+
+.receipt {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 0 auto;
+    margin-top: 200px;
+    max-width: 600px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .receipt h2 {
+    color: #333;
+    text-align: center;
+  }
+  
+  .receipt h3 {
+    color: #007bff;
+  }
+  
+  .receipt p {
+    margin-bottom: 10px;
+  }
+  
+  .receipt ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .receipt ul li {
+    margin-bottom: 5px;
+  }
+  
+  .receipt h4 {
+    color: #007bff;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .receipt p:last-child {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .receipt-details {
+    border: 1px solid gray;
+    padding: 10px;
+  }
+  
+  .main-content-receipt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 85vh;
+  }
+  
+.price {
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.price-new {
+    color: green;
+    display: block;
+    font-weight: bold;
+}
+
+.total {
+    margin: 10px;
+    text-align: right;
+    font-size: 1.2em;
+}
+
+#total-value {
+    color: green;
+}
