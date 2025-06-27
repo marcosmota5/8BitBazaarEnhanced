@@ -25,6 +25,19 @@ if (session_status() == PHP_SESSION_NONE) {
     <!-- Google Fonts -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+            
+    <!-- Jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Sweet Alert 2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.22.1/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.22.1/dist/sweetalert2.all.min.js"></script>
+
+    <!-- Toastr -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 </head>
 
 <body>
@@ -75,30 +88,38 @@ if (session_status() == PHP_SESSION_NONE) {
             <div class="form-field-group">
                 <div class="form-field">
                     <label for="first-name">First name<span class="required">*</span></label>
-                    <input class="input-box" type="text" id="first-name" name="first-name" maxlength="30" value="<?php echo isset($user) ? $user->first_name : "" ?>" required>
+                    <input class="input-box" type="text" id="first-name" name="first-name" maxlength="30"
+                        value="<?php echo isset($user) ? $user->first_name : "" ?>" required>
                 </div>
                 <div class="form-field">
                     <label for="last-name">Last name<span class="required">*</span></label>
-                    <input class="input-box" type="text" id="last-name" name="last-name" maxlength="30" value="<?php echo isset($user) ? $user->last_name : "" ?>" required>
+                    <input class="input-box" type="text" id="last-name" name="last-name" maxlength="30"
+                        value="<?php echo isset($user) ? $user->last_name : "" ?>" required>
                 </div>
             </div>
             <div class="form-field-group">
                 <div class="form-field">
                     <label for="birth-date">Birth date<span class="required">*</span></label>
-                    <input class="input-box" type="date" id="birth-date" name="birth-date" min="1900-01-01" value="<?php echo isset($user) ? $user->birth_date : "" ?>" required>
+                    <input class="input-box" type="date" id="birth-date" name="birth-date" min="1900-01-01"
+                        value="<?php echo isset($user) ? $user->birth_date : "" ?>" required>
                 </div>
                 <div class="form-field">
                     <label for="sex">Sex<span class="required">*</span></label>
                     <select class="input-box" id="sex" name="sex" required>
-                        <option <?php echo isset($user) && $user->sex == 'M' ? 'selected="selected"' : ''; ?> value="M">Male</option>
-                        <option <?php echo isset($user) && $user->sex == 'F' ? 'selected="selected"' : ''; ?> value="F">Female</option>
-                        <option <?php echo isset($user) && $user->sex == 'N' ? 'selected="selected"' : ''; ?> value="N">Not declared</option>
+                        <option <?php echo isset($user) && $user->sex == 'M' ? 'selected="selected"' : ''; ?> value="M">
+                            Male</option>
+                        <option <?php echo isset($user) && $user->sex == 'F' ? 'selected="selected"' : ''; ?> value="F">
+                            Female</option>
+                        <option <?php echo isset($user) && $user->sex == 'N' ? 'selected="selected"' : ''; ?> value="N">
+                            Not declared</option>
                     </select>
                 </div>
                 <div class="form-field">
                     <label for="profile-picture">Profile picture</label>
                     <div class="user-image-selector">
-                        <img id="image-preview" src="<?php echo isset($user) && !empty($user->picture_path) ? $user->picture_path : "images/users/no-picture.png" ?>" alt="Image Preview">
+                        <img id="image-preview"
+                            src="<?php echo isset($user) && !empty($user->picture_path) ? $user->picture_path : "images/users/no-picture.png" ?>"
+                            alt="Image Preview">
                         <input type="file" id="profile-picture" name="profile-picture" accept="image/*">
                     </div>
                 </div>
@@ -106,34 +127,40 @@ if (session_status() == PHP_SESSION_NONE) {
             <div class="form-field-group">
                 <div class="form-field">
                     <label for="phone-number">Phone Number<span class="required">*</span></label>
-                    <input class="input-box" type="tel" id="phone-number" name="phone-number" maxlength="20" value="<?php echo isset($user) ? $user->phone_number : "" ?>" required>
+                    <input class="input-box" type="tel" id="phone-number" name="phone-number" maxlength="20"
+                        value="<?php echo isset($user) ? $user->phone_number : "" ?>" required>
                 </div>
                 <div class="form-field">
                     <label for="email">Email<span class="required">*</span></label>
-                    <input class="input-box" type="email" id="email" name="email" maxlength="50" value="<?php echo isset($user) ? $user->email : "" ?>" required />
+                    <input class="input-box" type="email" id="email" name="email" maxlength="50"
+                        value="<?php echo isset($user) ? $user->email : "" ?>" required />
                 </div>
             </div>
             <div class="form-field-group">
                 <div class="form-field">
                     <label for="address-line-1">Address line 1<span class="required">*</span></label>
-                    <input class="input-box" type="text" id="address-line-1" name="address-line-1" maxlength="100" value="<?php echo isset($user) ? $user->address_line_1 : "" ?>" required>
+                    <input class="input-box" type="text" id="address-line-1" name="address-line-1" maxlength="100"
+                        value="<?php echo isset($user) ? $user->address_line_1 : "" ?>" required>
                 </div>
             </div>
             <div class="form-field-group">
                 <div class="form-field">
                     <label for="address-line-2">Address line 2</label>
-                    <input class="input-box" type="text" id="address-line-2" name="address-line-2" maxlength="100" value="<?php echo isset($user) ? $user->address_line_2 : "" ?>">
+                    <input class="input-box" type="text" id="address-line-2" name="address-line-2" maxlength="100"
+                        value="<?php echo isset($user) ? $user->address_line_2 : "" ?>">
                 </div>
                 <div class="form-field">
                     <label for="postal-code">Postal Code<span class="required">*</span></label>
-                    <input class="input-box" type="text" id="postal-code" name="postal-code" maxlength="20" value="<?php echo isset($user) ? $user->postal_code : "" ?>" required>
+                    <input class="input-box" type="text" id="postal-code" name="postal-code" maxlength="20"
+                        value="<?php echo isset($user) ? $user->postal_code : "" ?>" required>
                 </div>
             </div>
             <div class="form-field-group">
                 <div class="form-field">
                     <label for="country">Country<span class="required">*</span></label>
                     <select class="input-box" id="country" name="country" required>
-                        <option <?php echo isset($user) && $user->country == 'Canada' ? 'selected="selected"' : ''; ?> value="Canada">Canada</option>
+                        <option <?php echo isset($user) && $user->country == 'Canada' ? 'selected="selected"' : ''; ?>
+                            value="Canada">Canada</option>
                     </select>
                 </div>
                 <div class="form-field">
@@ -143,7 +170,8 @@ if (session_status() == PHP_SESSION_NONE) {
                         <option <?php echo isset($user) && $user->state_province == 'British Columbia' ? 'selected="selected"' : ''; ?> value="British Columbia">British Columbia</option>
                         <option <?php echo isset($user) && $user->state_province == 'Manitoba' ? 'selected="selected"' : ''; ?> value="Manitoba">Manitoba</option>
                         <option <?php echo isset($user) && $user->state_province == 'New Brunswick' ? 'selected="selected"' : ''; ?> value="New Brunswick">New Brunswick</option>
-                        <option <?php echo isset($user) && $user->state_province == 'Newfoundland and Labrador' ? 'selected="selected"' : ''; ?> value="Newfoundland and Labrador">Newfoundland and Labrador</option>
+                        <option <?php echo isset($user) && $user->state_province == 'Newfoundland and Labrador' ? 'selected="selected"' : ''; ?> value="Newfoundland and Labrador">Newfoundland and Labrador
+                        </option>
                         <option <?php echo isset($user) && $user->state_province == 'Nova Scotia' ? 'selected="selected"' : ''; ?> value="Nova Scotia">Nova Scotia</option>
                         <option <?php echo isset($user) && $user->state_province == 'Ontario' ? 'selected="selected"' : ''; ?> value="Ontario">Ontario</option>
                         <option <?php echo isset($user) && $user->state_province == 'Prince Edward Island' ? 'selected="selected"' : ''; ?> value="Prince Edward Island">Prince Edward Island</option>
@@ -153,27 +181,25 @@ if (session_status() == PHP_SESSION_NONE) {
                 </div>
                 <div class="form-field">
                     <label for="city">City<span class="required">*</span></label>
-                    <input class="input-box" type="text" id="city" name="city" value="<?php echo isset($user) ? $user->city : "" ?>" required>
-                </div>
-            </div>
-            <div class="form-field-group" <?php echo isset($successMessage) ? '' : 'style="display:none"' ?>>
-                <div class="success-message">
-                    <span><strong><?php echo isset($successMessage) ? $successMessage : "" ?></strong></span>
+                    <input class="input-box" type="text" id="city" name="city"
+                        value="<?php echo isset($user) ? $user->city : "" ?>" required>
                 </div>
             </div>
             <div class="form-field-group" <?php echo isset($errorMessages) ? '' : 'style="display:none"' ?>>
                 <div class="error-message">
-                    <span><strong>Error to register user. Please check the details below:<br><br></strong></span>
+                    <span><strong>Error to update user. Please check the details below:<br><br></strong></span>
                     <?php echo isset($errorMessages) ? $errorMessages : "" ?>
                 </div>
             </div>
             <!-- A div that holds the button to submit the form. The actual submit input is hidden and a button is used instead that has the onclick element to click on the input submit, the reason
                              for that is to enable better formatting and controls -->
             <div class="form-container">
-                <button class="submit-button" type="button" onclick="document.getElementById('submit-btn').click()"><span class="material-symbols-outlined">
+                <button class="submit-button" type="button"
+                    onclick="document.getElementById('submit-btn').click()"><span class="material-symbols-outlined">
                         save
                     </span>&nbsp;Save changes</button>
-                <input style="display: none;" type="text" id="user_id" name="user_id" value="<?php echo isset($user) ? $user->id : "" ?>">
+                <input style="display: none;" type="text" id="user_id" name="user_id"
+                    value="<?php echo isset($user) ? $user->id : "" ?>">
                 <input style="display:none" type="submit" id="submit-btn">
             </div>
         </form>
@@ -188,8 +214,13 @@ if (session_status() == PHP_SESSION_NONE) {
     <!-- Add the javascript file that has some scripts -->
     <script src="scripts/scripts.js"></script>
     <script>
+
+        <?php if (!empty($successMessage)): ?>
+            toastr.success('<?php echo addslashes($successMessage); ?>', 'Success');
+        <?php endif; ?>
+
         // Set the max property for the birth date to 10 years ago
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const today = new Date();
             const yyyy = today.getFullYear() - 10; // Don't allow users that are younger than 10 years to register
             const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-based, so we add 1
@@ -201,11 +232,27 @@ if (session_status() == PHP_SESSION_NONE) {
         });
 
         // Handle the file selection and show it on the img field
-        document.getElementById('profile-picture').addEventListener('change', function(event) {
+        document.getElementById('profile-picture').addEventListener('change', function (event) {
             const file = event.target.files[0];
             if (file) {
+                // Check file type
+                if (!file.type.startsWith('image/')) {
+                    alert('Please select an image file.');
+                    event.target.value = ''; // Clear the invalid file
+                    return;
+                }
+
+                // Check file size (5 MB = 5 * 1024 * 1024 bytes)
+                const maxSize = 5 * 1024 * 1024;
+                if (file.size > maxSize) {
+                    alert('The image is too large. Maximum allowed size is 5 MB.');
+                    event.target.value = ''; // Clear the invalid file
+                    return;
+                }
+
+                // Display the image preview
                 const reader = new FileReader();
-                reader.onload = function(e) {
+                reader.onload = function (e) {
                     const imgElement = document.getElementById('image-preview');
                     imgElement.src = e.target.result;
                     imgElement.style.display = 'block';

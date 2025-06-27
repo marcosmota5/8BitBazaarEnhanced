@@ -22,6 +22,15 @@ if (session_status() == PHP_SESSION_NONE) {
 
     <!-- Google Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+    <!-- Jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Toastr -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 </head>
 
 <body>
@@ -95,6 +104,12 @@ if (session_status() == PHP_SESSION_NONE) {
 
     <!-- Add the javascript file that has some scripts -->
     <script src="scripts/scripts.js"></script>
+
+    <?php if (!empty($toastrMessage)): ?>
+        <script>
+            toastr.success('<?php echo addslashes($toastrMessage); ?>', 'Success');
+        </script>
+    <?php endif; ?>
 </body>
 
 </html>

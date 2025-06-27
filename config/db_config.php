@@ -1,11 +1,11 @@
 <?php
 
-// $host='localhost:3307'; // Just if you have another port number
-$host = 'localhost'; // I didn't add the port number here (Only in my PC)
-$dbname = 'db_8bitbazzar';
+$host = 'localhost'; // No port number is needed for localhost, but it might be needed for remote servers
+$dbname = 'db_8bitbazzar'; // The name of the database
 $user = 'user_8bitbazzar'; // The default username
 $password = '4CJI5sz9Xvpj40dJ'; // Only for localhost, dummy password
 
+// Data Source Name (DSN) for MySQL
 $dsn = "mysql:host=$host;dbname=$dbname;port=3306";
 
 try {

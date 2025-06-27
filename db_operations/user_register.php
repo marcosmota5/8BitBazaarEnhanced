@@ -54,8 +54,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Validate profile picture
-    if (!(str_ends_with($profilePicture, 'jpg') || !str_ends_with($profilePicture, 'jpeg') || !str_ends_with($profilePicture, 'png') || !str_ends_with($profilePicture, 'gif'))) {
-        $errors[] = 'The file provided for the picture must be a .jpg, .jpeg, .png or .gif file';
+    if (isset($_FILES['profile-picture']) && $_FILES['profile-picture']['error'] === UPLOAD_ERR_OK) {
+        $fileTmpPath = $_FILES['profile-picture']['tmp_name'];
+        $fileName = $_FILES['profile-picture']['name'];
+        $fileSize = $_FILES['profile-picture']['size'];
+    
+        $maxSize = 5 * 1024 * 1024; // 5 MB
+        if ($fileSize > $maxSize) {
+            $errors[] = 'The image is too large. Maximum allowed size is 5 MB.';
+        }
+    
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mimeType = finfo_file($finfo, $fileTmpPath);
+        finfo_close($finfo);
+    
+        $allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+        if (!in_array($mimeType, $allowedTypes)) {
+            $errors[] = 'The uploaded file must be a valid image (JPG, PNG, GIF, WEBP).';
+        }
     }
 
     // Validate phone number
@@ -257,6 +273,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Save the logged user in the session
         $_SESSION['user_id'] = $userId;
+
+        // Save a toast notification in the session
+        $_SESSION['toastrMessage'] = 'User registered and logged in successfully!';
 
         // Redirect to the login page
         header("Location: index.php");

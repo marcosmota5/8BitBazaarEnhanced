@@ -54,6 +54,9 @@ function addToCart(productId) {
         sessionStorage.setItem("productids", JSON.stringify(cartItems));
 
         document.getElementById("cart").setAttribute("data-count", cartItems.length);
+
+        // Show a notification
+        toastr.success('Item added to cart!', 'Success');
     }
 }
 
