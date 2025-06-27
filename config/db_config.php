@@ -4,7 +4,7 @@
 $host = 'localhost'; // I didn't add the port number here (Only in my PC)
 $dbname = 'db_8bitbazzar';
 $user = 'user_8bitbazzar'; // The default username
-$password = '4CJI5sz9Xvpj40dJ'; // Empty by default => in your computer
+$password = '4CJI5sz9Xvpj40dJ'; // Only for localhost, dummy password
 
 $dsn = "mysql:host=$host;dbname=$dbname;port=3306";
 
