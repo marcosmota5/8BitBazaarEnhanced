@@ -6,8 +6,8 @@ require_once '../config/db_config.php';
 // If the request method received was a post, execute the codes
 // this is important so, when the page first load there's no error thrown
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Start the session
-    session_start();
+    // Include the session initialization file to start the session
+    require_once __DIR__ . "/config/session_init.php";
 
     // Set the sql statement
     $sql = 'SELECT id, first_name, last_name, email, phone_number, picture_path, status FROM tb_users WHERE id = :id LIMIT 1';

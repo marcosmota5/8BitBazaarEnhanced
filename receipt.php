@@ -1,9 +1,8 @@
 <?php
 
-// Start the session if it wasn't started
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
+// Include the session initialization file to start the session
+require_once __DIR__ . "/config/session_init.php";
+
 // If the request method received was a post, execute the codes
 // this is important so, when the page first load there's no error thrown
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
