@@ -3,7 +3,7 @@
 // Include the session initialization file to start the session
 require_once __DIR__ . "/config/session_init.php";
 
-$toastrMessage = $_SESSION['toastrMessage'];
+$toastrMessage = $_SESSION['toastrMessage'] ?? '';
 
 ?>
 <!DOCTYPE html>

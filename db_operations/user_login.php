@@ -76,6 +76,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Save the logged user in the session
         $_SESSION['user_id'] = $user->id;
 
+        // Save a toast notification in the session
+        $_SESSION['toastrMessage'] = 'User logged in successfully!';
+
         // Redirect to another page
         header("Location: index.php");
 
